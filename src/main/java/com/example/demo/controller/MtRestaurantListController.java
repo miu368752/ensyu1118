@@ -26,8 +26,8 @@ public class MtRestaurantListController {
 	}
 	
 	/*--- 検索リクエスト -------------------------*/
-	@PostMapping("/restaurant-search")
-	public String restaurantSearch(
+	@PostMapping("/mt-search")
+	public String mtSearch(
 			@ModelAttribute MtRestaurantSearchForm form,
 			Model model) {
 

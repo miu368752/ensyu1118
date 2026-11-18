@@ -8,7 +8,7 @@
 <body>
 
 <h2>店舗検索</h2>
-<form th:action="@{/restaurant-search}" method="POST" th:object="${mtRestaurantSearchForm}">
+<form th:action="@{/mt-search}" method="POST" th:object="${mtRestaurantSearchForm}">
 	【店舗名】（部分一致）<br>
    	<input type="text" th:field="*{restaurantName}"><br>
 	<br>
@@ -20,10 +20,18 @@
 
 	<table class="restaurant-list">
 		<tr>
-			<th>店舗ID</th><th>店舗名</th><th>キャッチフレーズ</th><th>レビュー数</th>
+			<th colspan="2">店舗ID</th><th>店舗名</th><th>キャッチフレーズ</th><th>レビュー数</th>
 		</tr>
 
 		<tr th:each="restaurant : ${restaurantList}">
+			<td>
+				<form th:action="@{/mt-show-edit}" method="POST">
+					<input type="hidden" name="restaurantId" th:value="${restaurant.restaurantId}">
+					<input type="hidden" name="restaurantName" th:value="${restaurant.restaurantName}">
+					<input type="hidden" name="catchPhrase" th:value="${restaurant.catchPhrase}">
+					<input type="submit" value="編集" class="tbtn">
+				</form>
+			</td>
 			<td th:text="${restaurant.restaurantId}"></td>
 			<td th:text="${restaurant.restaurantName}"></td>
 			<td th:text="${restaurant.catchPhrase}"></td>
@@ -32,7 +40,7 @@
 
 	</table>
 	<br>
-		<a th:href="@{/mt-top}">管理メニューに戻る</a>
+	<a th:href="@{/mt-top}">管理メニューに戻る</a>
 
 </div>
 
