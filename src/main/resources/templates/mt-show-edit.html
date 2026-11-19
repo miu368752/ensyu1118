@@ -9,7 +9,7 @@
 
 	<h2>店舗編集</h2>
 
-    <form th:action="@{/mt-edit}" method="POST" th:object="${mtRegistForm}">
+    <form th:action="@{/mt-edit}" method="POST" th:object="${mtReviewEditForm}">
 		【店舗ID】<br>
 		<p th:text="*{restaurantId}"></p>
 		<input type="hidden" th:field="*{restaurantId}">

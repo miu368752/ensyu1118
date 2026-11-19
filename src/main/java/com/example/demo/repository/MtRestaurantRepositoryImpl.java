@@ -30,6 +30,7 @@ public class MtRestaurantRepositoryImpl implements MtRestaurantRepository {
 				r.getCatchPhrase()			);
 		
 	}
+
 	@Override
 	public List<MtRestaurant> selectByNameWildcard(String restaurantName) {
 
@@ -64,32 +65,39 @@ public class MtRestaurantRepositoryImpl implements MtRestaurantRepository {
 			restaurant.setRestaurantId((int)one.get("restaurant_id"));
 			restaurant.setRestaurantName((String)one.get("restaurant_name"));
 			restaurant.setCatchPhrase((String)one.get("catch_phrase"));
-			int count = ((Long)one.get("review_count")).intValue(); // ← review_countをintで取得
-			restaurant.setReviewSum(count); // ← ※MtRestaurant側の型がintの場合
+			int count = ((Long)one.get("review_count")).intValue();
+			restaurant.setReviewSum(count);
 			result.add(restaurant);
 		}
 		return result; 
 	}
 
-@Override
-public void update(MtRestaurant r) {
+	@Override
+	public void update(MtRestaurant r) {
+		String sql =
+				" UPDATE                   " + 
+				"   m_restaurant           " + 
+				" SET                      " + 
+				"   restaurant_name = ? ,  " + 
+				"   catch_phrase = ?       " + 
+				" WHERE                    " + 
+				"   restaurant_id = ?      ";
+		
+		jdbcTemplate.update(sql, 
+				r.getRestaurantName(),
+				r.getCatchPhrase(),
+				r.getRestaurantId()			);
+	}
 
-	String sql =
-			" UPDATE             " + 
-			"   t_review         " + 
-			" SET                " + 
-			"   user_id = ? ,    " + 
-			"   visit_date = ? , " + 
-			"   rating = ?,      " + 
-			"   comment = ?      " + 
-			" WHERE              " + 
-			"   review_id = ?    ";
-	
-	jdbcTemplate.update(sql, 
-			r.getRestaurantName(),
-			r.getCatchPhrase()			);
-	
-	
+	@Override
+	public void delete(MtRestaurant r) {
+		String sql =
+				" DELETE                   " + 
+				" FROM                     " + 
+				"   m_restaurant           " + 
+				" WHERE                    " + 
+				"   restaurant_id = ?      ";
+		
+		jdbcTemplate.update(sql, r.getRestaurantId());
+	}
 }
-}
-

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Size;
 import lombok.Data;
 
 @Data
-public class MtReviewEditForm {
+public class MtRestaurantEditForm {
 	private Integer restaurantId;
 	@Size(min=1, max=32, message="1文字から32文字で指定してください。")
 	private String restaurantName;

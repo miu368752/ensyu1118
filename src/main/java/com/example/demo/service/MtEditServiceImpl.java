@@ -9,7 +9,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class MtEditServuceImpl implements MtEditService {
+public class MtEditServiceImpl implements MtEditService {
 
 	private final MtRestaurantRepository repository;
 	

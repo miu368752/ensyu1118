@@ -9,7 +9,11 @@
 
 	<h2>店舗編集確認</h2>
 
-	<table class="confirm-table" th:object="${mtRegistForm}">
+	<table class="confirm-table" th:object="${mtReviewEditForm}">
+		<tr>
+			<td class="guide">【店舗ID】</td>
+			<td th:text="*{restaurantId}"></td>
+		</tr>
 		<tr>
 			<td class="guide">【店舗名】</td>
 			<td th:text="*{restaurantName}"></td>
@@ -21,13 +25,15 @@
 	</table>
 	<br>
 
-    <form th:action="@{/mt-show-edit}" method="POST" th:object="${mtRegistForm}">
+    <form th:action="@{/mt-confirm-edit-review}" method="POST" th:object="${mtReviewEditForm}">
+    	<input type="hidden" th:field="*{restaurantId}">
     	<input type="hidden" th:field="*{restaurantName}">
     	<input type="hidden" th:field="*{catchPhrase}">
     	<input type="submit" value="更新" class="btn">
    	</form>
 
-    <form th:action="@{/mt-show-edit}" method="POST" th:object="${mtRegistForm}">
+    <form th:action="@{/mt-show-edit}" method="POST" th:object="${mtReviewEditForm}">
+    	<input type="hidden" th:field="*{restaurantId}">
     	<input type="hidden" th:field="*{restaurantName}">
     	<input type="hidden" th:field="*{catchPhrase}">
     	<input type="submit" value="もどる" class="btn">
